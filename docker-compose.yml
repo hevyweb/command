@@ -6,3 +6,37 @@ services:
       - './:/var/www/html'
     working_dir: '/var/www/html'
     command: 'php-fpm -F'
+    networks:
+      - net
+
+  db:
+    image: mysql:8
+    volumes:
+      - data.db:/var/lib/mysql:cached
+    ports:
+      - "3306:${MYSQL_PORT}"
+    command: mysqld --sql_mode=""
+    environment:
+      - "MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}"
+      - "MYSQL_DATABASE=${MYSQL_DATABASE}"
+      - "MYSQL_USER=${MYSQL_USER}"
+      - "MYSQL_PASSWORD=${MYSQL_PASSWORD}"
+    networks:
+      - net
+
+  mailhog:
+    image: mailhog/mailhog:latest
+    hostname: mailhog
+    ports:
+      - "1025:1025"
+      - "8025:8025"
+    networks:
+      - net
+
+networks:
+  net:
+    driver: bridge
+
+volumes:
+  data.db:
+    driver: "local"

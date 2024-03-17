@@ -4,6 +4,11 @@
 # Put parameters here that don't need to change on each machine where the app is deployed
 # https://symfony.com/doc/current/best_practices.html#use-parameters-for-application-configuration
 parameters:
+    from_email: "%env(EMAIL_FROM)%"
+    from_title: "%env(EMAIL_FROM_TITLE)%"
+    exchange_rate_alert_email: "%env(EXCHANGE_RATE_ALERT_EMAIL)%"
+    exchange_rate_alert_title: "%env(EXCHANGE_RATE_ALERT_TITLE)%"
+    iso4217_file: "/config/currencies.json"
 
 services:
     # default configuration for services in *this* file
@@ -11,8 +16,6 @@ services:
         autowire: true      # Automatically injects dependencies in your services.
         autoconfigure: true # Automatically registers your services as commands, event subscribers, etc.
 
-    # makes classes in src/ available to be used as services
-    # this creates a service per class whose id is the fully-qualified class name
     App\:
         resource: '../src/'
         exclude:
@@ -20,5 +23,11 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    Symfony\Bridge\Twig\Mime\TemplatedEmail:
+        public: true
+
+    Symfony\Component\Mime\Address:
+        class: Symfony\Component\Mime\Address
+        arguments:
+            - '%from_email%'
+            - '%from_title%'

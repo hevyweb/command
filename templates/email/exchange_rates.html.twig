@@ -1,0 +1,42 @@
+<div>
+    <div class="email-hello">Hello user</div>
+    <div class="email-body">
+        <div class="email-intro">
+            Some exchange rates exceeded specified threshold:
+        </div>
+        <div class="email-violations">
+            <div class="email-violation">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>
+                                Currency
+                            </th>
+                            <th>
+                                Old value
+                            </th>
+                            <th>
+                                New Value
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for currency, violation in violations %}
+                        <tr>
+                            <td>
+                                {{ currency }}
+                            </td>
+                            <td>
+                                {{ violation.old }}
+                            </td>
+                            <td>
+                                {{ violation.new }}
+                            </td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

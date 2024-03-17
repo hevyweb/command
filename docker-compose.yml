@@ -4,6 +4,8 @@ services:
     build: docker/php
     volumes:
       - './:/var/www/html'
+    depends_on:
+      - db
     working_dir: '/var/www/html'
     command: 'php-fpm -F'
     networks:
@@ -11,8 +13,11 @@ services:
 
   db:
     image: mysql:8
+    env_file:
+      - .env
+      - .env.local
     volumes:
-      - data.db:/var/lib/mysql:cached
+      - data.command:/var/lib/mysql:cached
     ports:
       - "3306:${MYSQL_PORT}"
     command: mysqld --sql_mode=""
@@ -38,5 +43,5 @@ networks:
     driver: bridge
 
 volumes:
-  data.db:
+  data.command:
     driver: "local"

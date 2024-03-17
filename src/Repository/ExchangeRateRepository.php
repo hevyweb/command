@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\ExchangeRate;
+use App\Entity\Threshold;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -21,28 +22,17 @@ class ExchangeRateRepository extends ServiceEntityRepository
         parent::__construct($registry, ExchangeRate::class);
     }
 
-    //    /**
-    //     * @return ExchangeRate[] Returns an array of ExchangeRate objects
-    //     */
-    //    public function findByExampleField($value): array
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->orderBy('e.id', 'ASC')
-    //            ->setMaxResults(10)
-    //            ->getQuery()
-    //            ->getResult()
-    //        ;
-    //    }
+    public function findExistingRates(array $thresholds): array
+    {
+        $currencies = array_map(fn (Threshold $threshold) => $threshold->getCurrency(), $thresholds);
 
-    //    public function findOneBySomeField($value): ?ExchangeRate
-    //    {
-    //        return $this->createQueryBuilder('e')
-    //            ->andWhere('e.exampleField = :val')
-    //            ->setParameter('val', $value)
-    //            ->getQuery()
-    //            ->getOneOrNullResult()
-    //        ;
-    //    }
+        $existingExchangeRates = $this->findBy(['currency' => $currencies]);
+
+        $return = [];
+        foreach ($existingExchangeRates as $exchangeRate) {
+            $return[$exchangeRate->getCurrency()] = $exchangeRate;
+        }
+
+        return $return;
+    }
 }

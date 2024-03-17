@@ -6,6 +6,9 @@ use App\Repository\ExchangeRateRepository;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @codeCoverageIgnore
+ */
 #[ORM\Entity(repositoryClass: ExchangeRateRepository::class)]
 class ExchangeRate
 {

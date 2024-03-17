@@ -13,9 +13,6 @@ services:
 
   db:
     image: mysql:8
-    env_file:
-      - .env
-      - .env.local
     volumes:
       - data.command:/var/lib/mysql:cached
     ports:

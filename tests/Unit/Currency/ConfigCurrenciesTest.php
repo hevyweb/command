@@ -26,7 +26,7 @@ class ConfigCurrenciesTest extends TestCase
         $this->parameterBag->method('get')->willReturnOnConsecutiveCalls('dummy', '/data');
         $this->expectException(NotAbleToReadFileException::class);
 
-        $this->sut->getCurrencies();
+        @$this->sut->getCurrencies();
     }
 
     public function testFailToParseJson(): void

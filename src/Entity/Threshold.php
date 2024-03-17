@@ -2,13 +2,12 @@
 
 namespace App\Entity;
 
-use App\Repository\ThresholdRepository;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @codeCoverageIgnore
  */
-#[ORM\Entity(repositoryClass: ThresholdRepository::class)]
+#[ORM\Entity]
 class Threshold
 {
     #[ORM\Id]

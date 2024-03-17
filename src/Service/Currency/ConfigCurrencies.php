@@ -22,12 +22,13 @@ readonly class ConfigCurrencies implements CurrencyProviderInterface
      */
     private function readConfigFile(): string
     {
-        $filePath = $this->parameterBag->get('kernel.project_dir').$this->parameterBag->get('iso4217_file');;
+        $filePath = $this->parameterBag->get('kernel.project_dir').$this->parameterBag->get('iso4217_file');
         $content = file_get_contents($filePath);
 
         if (!$content) {
             throw new NotAbleToReadFileException($filePath);
         }
+
         return $content;
     }
 

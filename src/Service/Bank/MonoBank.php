@@ -32,7 +32,7 @@ class MonoBank implements BankInterface
     {
         $response = $this->client->request(Request::METHOD_GET, self::API_URL);
 
-        if ($response->getStatusCode() != Response::HTTP_OK) {
+        if (Response::HTTP_OK != $response->getStatusCode()) {
             throw new ServerResponseFailed('Monobank server sent invalid response.');
         }
 
@@ -67,7 +67,7 @@ class MonoBank implements BankInterface
 
     private function convertCurrency(array $exchangeRate): string
     {
-        if (!isset($exchangeRate['currencyCodeA'])){
+        if (!isset($exchangeRate['currencyCodeA'])) {
             throw new JsonDataInconsistentException('Json does not contain currencyCodeA.');
         }
 

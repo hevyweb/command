@@ -23,7 +23,6 @@ class MonoBankTest extends TestCase
 
     public function setUp(): void
     {
-
         $this->client = $this->createMock(HttpClientInterface::class);
 
         $this->currencyProvider = $this->createMock(CurrencyProviderInterface::class);
@@ -34,38 +33,38 @@ class MonoBankTest extends TestCase
             $this->currencyProvider
         );
     }
-    
+
     private function currencyMock(): array
     {
         return [
-            'USD'=> [
-                'name'=> 'United States Dollar',
-                'demonym'=> 'US',
-                'majorSingle'=> 'Dollar',
-                'majorPlural'=> 'Dollars',
-                'ISOnum'=> 840,
-                'symbol'=> '$',
-                'symbolNative'=> '$',
-                'minorSingle'=> 'Cent',
-                'minorPlural'=> 'Cents',
-                'ISOdigits'=> 2,
-                'decimals'=> 2,
-                'numToBasic'=> 100,
+            'USD' => [
+                'name' => 'United States Dollar',
+                'demonym' => 'US',
+                'majorSingle' => 'Dollar',
+                'majorPlural' => 'Dollars',
+                'ISOnum' => 840,
+                'symbol' => '$',
+                'symbolNative' => '$',
+                'minorSingle' => 'Cent',
+                'minorPlural' => 'Cents',
+                'ISOdigits' => 2,
+                'decimals' => 2,
+                'numToBasic' => 100,
             ],
             'EUR' => [
-                'name'=> 'Euro',
-                'demonym'=> '',
-                'majorSingle'=> 'Euro',
-                'majorPlural'=> 'Euros',
-                'ISOnum'=> 978,
-                'symbol'=> '€',
-                'symbolNative'=> '€',
-                'minorSingle'=> 'Cent',
-                'minorPlural'=> 'Cents',
-                'ISOdigits'=> 2,
-                'decimals'=> 2,
-                'numToBasic'=> 100
-	        ],
+                'name' => 'Euro',
+                'demonym' => '',
+                'majorSingle' => 'Euro',
+                'majorPlural' => 'Euros',
+                'ISOnum' => 978,
+                'symbol' => '€',
+                'symbolNative' => '€',
+                'minorSingle' => 'Cent',
+                'minorPlural' => 'Cents',
+                'ISOdigits' => 2,
+                'decimals' => 2,
+                'numToBasic' => 100,
+            ],
         ];
     }
 
@@ -82,7 +81,7 @@ class MonoBankTest extends TestCase
 
     public function testResponseInvalidJson(): void
     {
-        $invalidJson = "<div>This is invalid json string</div>";
+        $invalidJson = '<div>This is invalid json string</div>';
 
         $response = $this->createMock(ResponseInterface::class);
         $response->method('getStatusCode')->willReturn(200);
@@ -98,9 +97,9 @@ class MonoBankTest extends TestCase
     {
         $json = json_encode([
             [
-                "currencyCodeA" => 978,
-                "currencyCodeB" => $this->sut::UAH_ISO,
-                "date" => 1710572406,
+                'currencyCodeA' => 978,
+                'currencyCodeB' => $this->sut::UAH_ISO,
+                'date' => 1710572406,
             ],
         ]);
 
@@ -119,11 +118,11 @@ class MonoBankTest extends TestCase
     {
         $json = json_encode([
             [
-                "currencyCodeA" => 48,
-                "currencyCodeB" => $this->sut::UAH_ISO,
-                "date" => 1710572406,
-                "rateBuy" => 42.05,
-                "rateSell" => 42.6003,
+                'currencyCodeA' => 48,
+                'currencyCodeB' => $this->sut::UAH_ISO,
+                'date' => 1710572406,
+                'rateBuy' => 42.05,
+                'rateSell' => 42.6003,
             ],
         ]);
 
@@ -156,25 +155,25 @@ class MonoBankTest extends TestCase
         yield 'No currencyCodeA' => [
             json_encode([
                 [
-                    "currencyCodeB" => 980,
-                    "date" => 1710572406,
-                    "rateBuy" => 42.05,
-                    "rateSell" => 42.6003,
+                    'currencyCodeB' => 980,
+                    'date' => 1710572406,
+                    'rateBuy' => 42.05,
+                    'rateSell' => 42.6003,
                 ],
             ]),
-            'Json does not contain currencyCodeA.'
+            'Json does not contain currencyCodeA.',
         ];
 
         yield 'No currencyCodeB' => [
             json_encode([
                 [
-                    "currencyCodeA" => 48,
-                    "date" => 1710572406,
-                    "rateBuy" => 42.05,
-                    "rateSell" => 42.6003,
+                    'currencyCodeA' => 48,
+                    'date' => 1710572406,
+                    'rateBuy' => 42.05,
+                    'rateSell' => 42.6003,
                 ],
             ]),
-            'Json does not contain currencyCodeB.'
+            'Json does not contain currencyCodeB.',
         ];
     }
 
@@ -182,17 +181,17 @@ class MonoBankTest extends TestCase
     {
         $json = json_encode([
             [
-                "currencyCodeA" => 840,
-                "currencyCodeB" => $this->sut::UAH_ISO,
-                "date" => 1710572406,
-                "rateBuy" => 46.4007,
-                "rateSell" => 42.6003,
+                'currencyCodeA' => 840,
+                'currencyCodeB' => $this->sut::UAH_ISO,
+                'date' => 1710572406,
+                'rateBuy' => 46.4007,
+                'rateSell' => 42.6003,
             ],
             [
-                "currencyCodeA" => 978,
-                "currencyCodeB" => $this->sut::UAH_ISO,
-                "date" => 1710572406,
-                "rateCross" => 49.5689,
+                'currencyCodeA' => 978,
+                'currencyCodeB' => $this->sut::UAH_ISO,
+                'date' => 1710572406,
+                'rateCross' => 49.5689,
             ],
         ]);
         $response = $this->createMock(ResponseInterface::class);

@@ -12,7 +12,7 @@ class ExchangeRateEvent extends Event
     {
         $this->violations[$currency] = [
             'new' => $newExRate,
-            'old' => $oldExRate
+            'old' => $oldExRate,
         ];
 
         return $this;

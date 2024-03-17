@@ -44,18 +44,18 @@ class ConfigCurrenciesTest extends TestCase
 
         $result = $this->sut->getCurrencies();
         $expected = [
-                'name'=> 'United States Dollar',
-                'demonym'=> 'US',
-                'majorSingle'=> 'Dollar',
-                'majorPlural'=> 'Dollars',
-                'ISOnum'=> 840,
-                'symbol'=> '$',
-                'symbolNative'=> '$',
-                'minorSingle'=> 'Cent',
-                'minorPlural'=> 'Cents',
-                'ISOdigits'=> 2,
-                'decimals'=> 2,
-                'numToBasic'=> 100,
+                'name' => 'United States Dollar',
+                'demonym' => 'US',
+                'majorSingle' => 'Dollar',
+                'majorPlural' => 'Dollars',
+                'ISOnum' => 840,
+                'symbol' => '$',
+                'symbolNative' => '$',
+                'minorSingle' => 'Cent',
+                'minorPlural' => 'Cents',
+                'ISOdigits' => 2,
+                'decimals' => 2,
+                'numToBasic' => 100,
         ];
 
         $this->assertEquals($expected, $result['USD']);

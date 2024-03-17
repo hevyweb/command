@@ -72,6 +72,7 @@ class ExchangeRateWatcherTest extends TestCase
         $threshold = $this->createMock(Threshold::class);
         $threshold->method('getCurrency')->willReturnOnConsecutiveCalls('USD', 'BRL', 'CNY');
         $threshold->method('getLevel')->willReturnOnConsecutiveCalls(5.0001, 1, 0.0001);
+
         return [
             $threshold,
             $threshold,
